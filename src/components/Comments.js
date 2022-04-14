@@ -21,14 +21,16 @@ const Comments = () => {
     const id = uniqid();
     dispatch(commentCreate(textComment, id));
   };
-
   return (
     <div className="card-comments">
       <form onSubmit={handleSubmit} className="comments-item-create">
         <input type="text" value={textComment} onChange={handleInput} />
         <input type="submit" hidden />
       </form>
-      <SingleComment />
+      {!!comments.length &&
+        comments.map((res) => {
+          return <SingleComment key={res.id} data={res} />;
+        })}
     </div>
   );
 };
